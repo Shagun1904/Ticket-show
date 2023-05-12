@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+Add Venue
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-sm-10 offset-sm-1">
+            <div class="myCont">
+                <h1 class="text-center text-uppercase">Add Venue</h1>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{messages[0]}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                {% endwith %}
+                <form action="/venueUpdate/{{v_id.id}}" method="POST">
+                    <div class="form-group">
+                        <label for="updateName">Venue Name:</label>
+                        <input type="text" class="form-control" name="updateName" id="updateName"
+                            value="{{v_id.v_venueName}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updatePlace">Place:</label>
+                        <input type="text" class="form-control" name="updatePlace" id="updatePlace"
+                            value="{{v_id.v_place}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updateCapacity">Capacity:</label>
+                        <input type="number" class="form-control" name="updateCapacity" id="updateCapacity"
+                            value="{{v_id.v_capacity}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vLocation">Location:</label>
+                        <input type="text" class="form-control" name="vLocation" id="vLocation"
+                            value="{{v_id.v_location}}" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organizer">Organizer:</label>
+                        <input type="text" class="form-control" name="organizer" id="organizer" value="{{email}}"
+                            disabled>
+                    </div>
+
+                    <button type="create" class="btn btn-primary btn-block">Update</button>
+                </form>
+                <div class="form-group myUtility">
+                    <a href="{{url_for('adminHome')}}">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

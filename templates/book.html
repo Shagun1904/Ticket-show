@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+Add Event
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-sm-10 offset-sm-1">
+            <div class="myCont">
+                <h1 class="text-center text-uppercase">Booking</h1>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{messages[0]}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <h5><strong>Event Name: </strong>{{e_d.e_title}}</h5>
+                <h5><strong>Event Location: </strong>{{e_d.e_location}}</h5>
+                <h5><strong>Price </strong>{{e_d.e_price}}</h5>
+                
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <label for="count">Ticket Count</label>
+                        <input type="number" class="form-control" name="count" id="count">
+                    </div>
+                    <button type="create" class="btn btn-primary btn-block">Confirm Booking</button>
+                </form>
+                <div class="mtUtility form-group">
+                    <a href="{{url_for('home')}}">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

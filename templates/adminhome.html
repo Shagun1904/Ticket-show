@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}
+    Admin Home
+{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{messages[0]}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="myHomeCont">
+    <h2 class="text-capitalize text-success" id="heading">Welcome {{name}} !!</h2>
+    <a href="{{url_for('createvenue')}}"><button class="btn btn-md btn-success">Add Venue</button></a>
+</div>
+<div class="myViewCont">
+    <div class="container-fluid">
+        <h4 class="text-success">Venues</h4>
+        {% if v_d|length == 0 %}
+        <h2 class="text-center text-success">No Venues Register Yet</h2>
+        {% else %}
+        {% for i in v_d %}
+        <div class="card border-success">
+            <div class="card-header text-success text-center">Venue: {{i["v_venueName"]}}</div>
+            <div class="card-body">
+                <h5 class="card-title text-success">Venue Details</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">Organizer: {{i["v_organizer"]}}</li>
+                    <li class="list-group-item">Location: {{i["v_location"]}}</li>
+                    <li class="list-group-item">Place: {{i["v_place"]}}</li>
+                    <li class="list-group-item">Capacity: {{i["v_capacity"]}}</li>
+                </ul>
+                <br>
+                <h5 class="card-title text-success">Click Below for Event Detail</h5>
+                <a href="{{url_for('createvent', id=i['id'])}}"><button class="btn btn-success btn-md">Events</button></a>
+                <div class="dropdown-divider"></div>
+            </div>
+            <div class="card-footer">
+                <a href="/venueUpdate/{{i['id']}}"><button class="btn btn-md btn-warning">Update Venue</button></a>
+                <a href="/venueDelete/{{i['id']}}"><button class="btn btn-md btn-danger">Delete Venue</button></a>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

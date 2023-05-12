@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}
+Add Venue
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-sm-10 offset-sm-1">
+            <div class="myCont">
+                <h1 class="text-center text-uppercase">Add Venue</h1>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{messages[0]}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                {% endwith %}
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <label for="venueName">Venue Name:</label>
+                        <input type="text" class="form-control" name="venueName" id="venueName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="place">Place:</label>
+                        <input type="text" class="form-control" name="place" id="place">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="capacity">Capacity:</label>
+                        <input type="number" class="form-control" name="capacity" id="capacity">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vLocation">Location:</label>
+                        <select class="form-control" aria-label="Default select example" id="vLocation" name="vLocation">
+                            <option selected disabled>-- Select Location --</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Nagpur">Nagpur</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organizer">Organizer:</label>
+                        <input type="text" class="form-control" name="organizer" id="organizer" value="{{email}}" disabled>
+                    </div>
+
+                    <button type="create" class="btn btn-primary btn-block">Create</button>
+                </form>
+                <div class="form-group myUtility">
+                    <a href="{{url_for('adminHome')}}">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

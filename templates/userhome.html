@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+User Home
+{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{messages[0]}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+{% endwith %}
+<div class="myHomeCont">
+    <h2 class="text-capitalize text-success" id="heading">Welcome {{name}} !!</h2>
+    <a href="/allBookings"><button class="btn btn-md btn-success">Your Bookings</button></a>
+</div>
+<div class="myViewCont">
+    <div class="container-fluid">
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="location">
+                    Please select a location
+                </label>
+                <select class="form-control" aria-label="Default select example" id="location" name="location">
+                    <option selected disabled>-- Select Location --</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Nagpur">Nagpur</option>
+                </select>
+            </div>
+            <button class="btn btn-primary btn-block">Search</button>
+        </form>
+        <div class="dropdown-divider"></div>
+        <h5 class="card-title text-success">Events</h5>
+
+        {% if e_d|length ==0 %}
+        <h2 class="text-center text-success">No Events Registered Yet</h2>
+        {% else %}
+        <div class="card-columns" style="padding-right: 2%;">
+            {% for i in e_d %}
+            <div class="card border-primary">
+                <div class="card-header text-primary text-center">
+                    Event: {{i["e_title"]}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Event Details</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">Date and Time: {{i["e_time"]}}</li>
+                        <li class="list-group-item">Tags: {{i["e_tags"]}}</li>
+                        <li class="list-group-item">Price: {{i["e_price"]}}</li>
+                        <li class="list-group-item">Venue: {{i["e_venue"]}}</li>
+                        <li class="list-group-item">Location: {{i["e_location"]}}</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="{{url_for('book', bid=i['id'])}}"><button class="btn btn-md btn-primary">Book</button></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
